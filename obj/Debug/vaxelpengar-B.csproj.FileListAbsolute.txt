@@ -1,0 +1,7 @@
+c:\users\sonny\documents\visual studio 2012\Projects\vaxelpengar-B\bin\Debug\vaxelpengar-B.exe.config
+C:\Users\Sonny\Documents\Visual Studio 2012\Projects\1dv402-sk222sw-1-1-vaxelpengar-B\bin\Debug\vaxelpengar-B.exe.config
+C:\Users\Sonny\Documents\Visual Studio 2012\Projects\1dv402-sk222sw-1-1-vaxelpengar-B\obj\Debug\vaxelpengar-B.csprojResolveAssemblyReference.cache
+C:\Users\Sonny\Documents\Visual Studio 2012\Projects\1dv402-sk222sw-1-1-vaxelpengar-B\bin\Debug\vaxelpengar-B.exe
+C:\Users\Sonny\Documents\Visual Studio 2012\Projects\1dv402-sk222sw-1-1-vaxelpengar-B\bin\Debug\vaxelpengar-B.pdb
+C:\Users\Sonny\Documents\Visual Studio 2012\Projects\1dv402-sk222sw-1-1-vaxelpengar-B\obj\Debug\vaxelpengar-B.exe
+C:\Users\Sonny\Documents\Visual Studio 2012\Projects\1dv402-sk222sw-1-1-vaxelpengar-B\obj\Debug\vaxelpengar-B.pdb
