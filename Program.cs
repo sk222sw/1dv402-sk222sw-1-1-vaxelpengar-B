@@ -14,54 +14,126 @@ namespace vaxelpengar_B
             //respektive erhållet belopp. Efter att ha beräknat belopp att betala, öresavrundningen, växeln tillbaka 
             //och skrivit ut ett kvitto ska metoden SplitIntoDenominations anropas. 
 
+            uint subtotal = 0;
             double totalSum = 0;
             uint moneyRecieved = 0;
             double roundingOffAmount = 0;
-            uint toPay = 0;
-            uint moneyBack = 0;
 
-            totalSum = ReadPositiveDouble("Ange totalsumma: ");
+            do
+            {
+                totalSum = ReadPositiveDouble("Ange totalsumma:       ");
 
-            moneyRecieved = ReadUint("Ange erhållet belopp: ");
+                subtotal = (uint)Math.Round(totalSum);
+                roundingOffAmount = totalSum - subtotal;
 
-            Console.WriteLine(totalSum);
-            Console.WriteLine(moneyRecieved);
+                moneyRecieved = ReadUint("Ange erhållet belopp: ", subtotal);
+
+
+                Console.WriteLine(totalSum);
+                Console.WriteLine(moneyRecieved);
+                Console.WriteLine("Subtotal är {0}", subtotal);
+                //Skriv ut belopp att betala, öresavrundning, växel tillbaka.
+                //Sedan anropa SplitIntoDenominations
+
+                SplitIntoDenominations(subtotal);
+                Console.WriteLine("Tryck tangent för ny räkning. Esc avslutar.");
+            }
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+	{
+	         
+	}
 
         }
 
         static double ReadPositiveDouble(string prompt) 
         {
             string userInput = null;
-            Console.WriteLine(prompt);
-            userInput = Console.ReadLine();
+            do
+            {
+                Console.Write(prompt);
+                try
+                {
+                    userInput = Console.ReadLine();
+                    if (double.Parse(userInput) >= 0.99)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine();
+                        Console.WriteLine("FEL! '{0}' kan inte tolkas som en giltig summa pengar.", userInput);
+                        Console.WriteLine();
+                    }
+                }
+                catch
+                {   
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine();
+                    Console.WriteLine("FEL! Erhållet belopp felaktigt.");
+                    Console.WriteLine();
+                }
+                Console.ResetColor();
+            }
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
+
             return double.Parse(userInput);
-            //Metoden ska returnera ett värde av typen double.
-            //Innan värdet returneras ska metoden säkerställa att användaren matat in ett värde som, efter 
-            //avrundning, är större eller lika med 1. Om det inmatade inte kan tolkas som ett korrekt värde ska 
-            //användaren få en chans att göra en ny inmatning.
-            //Till metoden ska det vara möjligt att skicka en sträng med information som ska visas i anslutning till 
-            //där inmatningen av värdet sker. I Figur B.3 har argumentet "Ange totalsumma : " skickats 
-            //med vid anropet av metoden.
         }
 
-        static uint ReadUint(string prompt)
+        static uint ReadUint(string prompt, uint minValue)
         {
             string userInput = null;
-            Console.WriteLine(prompt);
-            userInput = Console.ReadLine();
-            //Metoden ska returnera ett värde av typen uint. (Datatypen uint passar i detta fall då endast hela 
-            //kronor motsvarande ett värde större än 0 ska hanteras.)
-            //Innan värdet returneras ska metoden säkerställa att användaren matat in ett värde som är större eller 
-            //lika med angivet minsta värde. Om det inmatade inte kan tolkas som ett korrekt värde ska användaren 
-            //få en chans att göra en ny inmatning.
-            //Till metoden ska det vara möjligt att skicka med två argument. Det första argument ska vara en sträng 
-            //med information som ska visas i anslutning till där inmatningen av värdet sker. Det andra argumentet 
-            //är det minsta värdet som är giltigt. I Figur B.4 har argumenten "Ange erhållet belopp: " och 538
-            //skickats med vid anropet av metoden. 
+
+            do
+            {
+                Console.Write(prompt);
+                userInput = Console.ReadLine();
+                try
+                {
+                    if (minValue < uint.Parse(userInput))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine();
+                        Console.WriteLine("FEL! {0} kr är ett för litet belopp. Esc för att avsluta, ny tangent för nytt försök", userInput);
+                        Console.WriteLine();
+                    }
+                }
+                catch
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine();
+                    Console.WriteLine("FEL! Erhållet belopp felaktigt.  Esc för att avsluta, ny tangent för nytt försök");
+                    Console.WriteLine();
+                }
+                Console.ResetColor();
+            }
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
             return uint.Parse(userInput);
         }
 
-        static void SplitIntoDenominations() {}
+        static void SplitIntoDenominations(uint change) 
+        {
+            uint subtotal;
+            subtotal = change;
+            uint[] notes = new uint[2];
+            notes[0] = 0;       //100-lappar
+            notes[1] = 0;       //1-kronor
+
+
+
+            Console.WriteLine("100-lappar: {0}", notes[0]);
+            Console.WriteLine("1-kronor: {0}", notes[1]);
+        }
 
     }
 }
