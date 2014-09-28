@@ -18,25 +18,38 @@ namespace vaxelpengar_B
             double totalSum = 0;
             uint moneyRecieved = 0;
             double roundingOffAmount = 0;
+            uint moneyBack = 0;
 
             do
             {
                 totalSum = ReadPositiveDouble("Ange totalsumma:       ");
 
-                subtotal = (uint)Math.Round(totalSum);
-                roundingOffAmount = totalSum - subtotal;
+                subtotal = (uint)Math.Round(totalSum);          //Öresavrundning
+                roundingOffAmount = totalSum - subtotal;        // ------"------
 
                 moneyRecieved = ReadUint("Ange erhållet belopp: ", subtotal);
 
-
-                Console.WriteLine(totalSum);
-                Console.WriteLine(moneyRecieved);
-                Console.WriteLine("Subtotal är {0}", subtotal);
+                moneyBack = moneyRecieved - subtotal;
                 //Skriv ut belopp att betala, öresavrundning, växel tillbaka.
+                Console.WriteLine();
+                Console.WriteLine("-------------------------");
+                Console.WriteLine("Totalsumma: {0}", totalSum);
+                Console.WriteLine("Öresavrundning: {0}", roundingOffAmount);
+                Console.WriteLine("Att betala: {0}", subtotal);
+                Console.WriteLine("Kontant: {0}", moneyRecieved);
+                Console.WriteLine("Tillbaka: {0}", moneyBack);
+                Console.WriteLine("-------------------------");
+                Console.WriteLine();
                 //Sedan anropa SplitIntoDenominations
 
-                SplitIntoDenominations(subtotal);
+                SplitIntoDenominations(moneyBack);
+
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
                 Console.WriteLine("Tryck tangent för ny räkning. Esc avslutar.");
+                Console.WriteLine();
+                Console.ResetColor();
             }
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 	{
@@ -126,13 +139,19 @@ namespace vaxelpengar_B
             uint subtotal;
             subtotal = change;
             uint[] notes = new uint[2];
-            notes[0] = 0;       //100-lappar
-            notes[1] = 0;       //1-kronor
+            notes[0] = 100;       //100-lappar
+            notes[1] = 1;         //1-kronor
+
+            notes[0] = subtotal % 100;
+            subtotal = subtotal - notes[0];
 
 
+            Console.WriteLine(notes[0]);
+            Console.WriteLine(subtotal);
 
-            Console.WriteLine("100-lappar: {0}", notes[0]);
-            Console.WriteLine("1-kronor: {0}", notes[1]);
+            //if (subtotal > 0)
+            //Console.WriteLine("100-lappar: {0}", notes[0]);
+            //Console.WriteLine("1-kronor: {0}", notes[1]);
         }
 
     }
