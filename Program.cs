@@ -136,22 +136,64 @@ namespace vaxelpengar_B
 
         static void SplitIntoDenominations(uint change) 
         {
-            uint subtotal;
-            subtotal = change;
-            uint[] notes = new uint[2];
-            notes[0] = 100;       //100-lappar
-            notes[1] = 1;         //1-kronor
-
-            notes[0] = subtotal % 100;
-            subtotal = subtotal - notes[0];
 
 
-            Console.WriteLine(notes[0]);
-            Console.WriteLine(subtotal);
+            uint[] notes = new uint[7];
+            notes[0] = 500;
+            notes[1] = 100;
+            notes[2] = 50;
+            notes[3] = 20;
+            notes[4] = 10;
+            notes[5] = 5;
+            notes[6] = 1;
 
-            //if (subtotal > 0)
-            //Console.WriteLine("100-lappar: {0}", notes[0]);
-            //Console.WriteLine("1-kronor: {0}", notes[1]);
+            for (int i = 0; i < notes.Length; i++)
+            {
+                uint temporaryNoteValue = notes[i];
+                notes[i] = change / temporaryNoteValue; 
+                change = change % temporaryNoteValue;
+                if (notes[i] > 0)
+                {
+                    Console.WriteLine("Antalet {0}-{1} är: {2}",
+                        temporaryNoteValue, notes.Length < 4 ? "lappar" : "kronor", notes[i]);
+                }
+            }
+            
+                //                {
+                //    while (notes[i] > 4)
+                //    {
+                //            Console.WriteLine("Antalet {0}-kronor är: {1}", temp, notes[i]);
+                //            break;
+                //    }
+                //    while (notes[i] < 4)
+                //    {
+                //        Console.WriteLine("Antalet {0}-lappar är: {1}", temp, notes[6]);
+                //        break;
+                //    }
+                //}
+
+
+            //Console.WriteLine("Antalet 500-lappar är: {0}", notes[0]);
+            //Console.WriteLine("Antalet 100-lappar är: {0}", notes[1]);
+            //Console.WriteLine("Antalet 50-lappar är: {0}", notes[2]);
+            //Console.WriteLine("Antalet 20-lappar är: {0}", notes[3]);
+            //Console.WriteLine("Antalet 10-kronor är: {0}", notes[4]);
+            //Console.WriteLine("Antalet 5-kronor är: {0}", notes[5]);
+            //Console.WriteLine("Antalet 1-kronor är: {0}", notes[6]);
+            //uint fiveH = change / notes[0];
+            //change %= notes[0];
+            //uint hunder = change / notes[1];
+            //change %= notes[1];
+            //uint fifty = change / notes[2];
+            //change %= notes[2];
+            //uint twenty = change / notes[3];
+            //change %= notes[3];
+            //uint tens = change / notes[4];
+            //change %= notes[4];
+            //uint fives = change / notes[5];
+            //change %= notes[5];
+            //uint ones = change / notes[6];
+            //change %= notes[6];
         }
 
     }
